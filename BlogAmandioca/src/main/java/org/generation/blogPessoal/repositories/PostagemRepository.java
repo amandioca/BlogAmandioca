@@ -2,23 +2,23 @@ package org.generation.blogPessoal.repositories;
 
 import java.util.List;
 
-import org.generation.blogPessoal.models.PostagemModel;
+import org.generation.blogPessoal.models.Postagem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PostagemRepository extends JpaRepository<PostagemModel, Long> {
+public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 	
 	/**
-	 * Metodo utilizado para realizar pesquisa pela coluna tema da tabela tema
+	 * Metodo utilizado para realizar pesquisa pela coluna titulo da tabela postagem
 	 * 
 	 * @param titulo
-	 * @return List com PostagemModel
+	 * @return List com a classe Postagem
 	 * @author Amanda
 	 * @since 1.0
 	 * 
 	 */
 	
-	public List<PostagemModel>findAllByTituloContainingIgnoreCase(String titulo);
+	public List<Postagem>findAllByTituloContainingIgnoreCase(String titulo);
 
 }
