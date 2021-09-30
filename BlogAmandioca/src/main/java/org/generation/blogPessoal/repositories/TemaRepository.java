@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
  * @version 1.0
  */
 @Repository
-public interface TemaRepository extends JpaRepository<Tema, Long>{
-	
+public interface TemaRepository extends JpaRepository<Tema, Long> {
+
 	/**
 	 * Metodo utilizado para realizar pequisas na tabela tema, coluna tema
-	 *  
+	 * 
 	 * @param tema
 	 * @return list com tema
 	 * @since 1.0
