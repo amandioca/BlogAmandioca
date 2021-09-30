@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostagemRepository extends JpaRepository<Postagem, Long> {
-	
+
 	/**
 	 * Metodo utilizado para realizar pesquisa pela coluna titulo da tabela postagem
 	 * 
@@ -18,7 +18,6 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 	 * @since 1.0
 	 * 
 	 */
-	
-	public List<Postagem>findAllByTituloContainingIgnoreCase(String titulo);
+	public List<Postagem> findAllByTituloContainingIgnoreCase(String titulo);
 
 }
