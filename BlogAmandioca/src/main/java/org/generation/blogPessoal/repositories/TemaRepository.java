@@ -20,6 +20,6 @@ public interface TemaRepository extends JpaRepository<Tema, Long> {
 	 * @return list com tema
 	 * @since 1.0
 	 */
-	public List<Tema> findAllByTemaContainingIgnoreCase(String tema);
+	public List<Tema> findByTemaContainingIgnoreCase(String tema);
 
 }

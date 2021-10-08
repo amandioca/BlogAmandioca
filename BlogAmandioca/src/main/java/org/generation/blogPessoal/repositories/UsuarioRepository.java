@@ -20,7 +20,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	 * @return list com nome
 	 * @since 1.0
 	 */
-	public List<Usuario> findAllByNomeContainingIgnoreCase(String nome);
+	public List<Usuario> findByNomeContainingIgnoreCase(String nome);
 
 	/**
 	 * Metodo utilizado para realizar pequisas na tabela usuario, coluna email

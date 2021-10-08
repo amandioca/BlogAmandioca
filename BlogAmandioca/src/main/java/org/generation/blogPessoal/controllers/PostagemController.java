@@ -31,15 +31,15 @@ public class PostagemController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
-	@GetMapping("/{id_postagem}") // vai usar o valor de "id"
-	public ResponseEntity<Postagem> GetById(@PathVariable(value = "id_postagem") long idPostagem) {
-		return repository.findById(idPostagem).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.notFound().build());
+	@GetMapping("/{id_postagem}")
+	public ResponseEntity<Postagem> GetById(@PathVariable(value = "id_postagem") long id_postagem) {
+		return repository.findById(id_postagem).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.noContent().build());
 	}
 
 	@GetMapping("/titulo/{titulo}")
 	public ResponseEntity<List<Postagem>> GetByTitulo(@PathVariable(value = "titulo") String titulo) {
-		return ResponseEntity.ok(repository.findAllByTituloContainingIgnoreCase(titulo));
+		return ResponseEntity.ok(repository.findByTituloContainingIgnoreCase(titulo));
 	}
 
 	@PostMapping
