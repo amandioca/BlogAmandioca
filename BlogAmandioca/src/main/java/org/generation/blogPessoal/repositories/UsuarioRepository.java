@@ -29,5 +29,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	 * @return list com email
 	 * @since 1.0
 	 */
-	public List<Usuario> findByEmailContainingIgnoreCase(String email);
+	public List<Usuario> findByEmail(String email);
 }
