@@ -5,7 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.generation.blogPessoal.models.Usuario;
+import org.generation.blogPessoal.models.dtos.CredenciaisDTO;
+import org.generation.blogPessoal.models.dtos.UsuarioLoginDTO;
 import org.generation.blogPessoal.repositories.UsuarioRepository;
+import org.generation.blogPessoal.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  * @author Amanda
@@ -29,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
 	private @Autowired UsuarioRepository repository;
+	private @Autowired UsuarioService service;
 
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll() {
@@ -46,14 +51,19 @@ public class UsuarioController {
 		return ResponseEntity.ok(repository.findByNomeContainingIgnoreCase(nome));
 	}
 
-	@GetMapping("/usuario/{email}")
-	public ResponseEntity<List<Usuario>> getByEmail(@PathVariable(value = "email") String email) {
-		return ResponseEntity.ok(repository.findByEmail(email));
+	@PostMapping("/cadastro")
+	public ResponseEntity<Object> salvar(@Valid @RequestBody Usuario novoUsuario) {
+		return service.cadastrarUsuario(novoUsuario).map(resp -> ResponseEntity.status(201).body(resp))
+				.orElseThrow(() -> {
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+							"Email existente, cadastre outro email!.");
+				});
+
 	}
 
-	@PostMapping
-	public ResponseEntity<Usuario> post(@Valid @RequestBody Usuario novoUsuario) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(novoUsuario));
+	@PostMapping("/login")
+	public ResponseEntity<CredenciaisDTO> logar(@Valid @RequestBody UsuarioLoginDTO usuarioParaAutenticar) {
+		return service.pegarCredenciais(usuarioParaAutenticar);
 	}
 
 	@PutMapping
