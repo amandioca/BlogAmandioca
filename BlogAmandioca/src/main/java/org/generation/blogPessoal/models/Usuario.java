@@ -21,6 +21,14 @@ public class Usuario {
 	private @NotBlank String nome;
 	private @NotBlank @Email String email;
 	private @NotBlank @Size(min = 5, max = 100) String senha;
+	
+	public Usuario(@NotBlank String nome, @NotBlank @Email String email,
+			@NotBlank @Size(min = 5, max = 100) String senha) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+	}
 
 	public long getIdUsuario() {
 		return idUsuario;
