@@ -1,5 +1,9 @@
 package org.generation.blogPessoal.models.dtos;
 
+/**
+ * @author Amanda
+ * @version 1.0
+ */
 public class CredenciaisDTO {
 
 	private Long idUsuario;
