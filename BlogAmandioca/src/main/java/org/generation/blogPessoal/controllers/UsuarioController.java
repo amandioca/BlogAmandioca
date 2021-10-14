@@ -40,14 +40,14 @@ public class UsuarioController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
-	@GetMapping("/{id_usuario}")
-	public ResponseEntity<Usuario> getById(@PathVariable(value = "id_usuario") Long id_usuario) {
-		return repository.findById(id_usuario).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.noContent().build());
+	@GetMapping("/{id}")
+	public ResponseEntity<Usuario> getById(@PathVariable (value = "id") Long idUsuario) {
+		return repository.findById(idUsuario).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/usuario/{usuario}")
-	public ResponseEntity<List<Usuario>> getByUsuario(@PathVariable(value = "usuario") String nome) {
+	public ResponseEntity<List<Usuario>> getByNome(@PathVariable String nome) {
 		return ResponseEntity.ok(repository.findByNomeContainingIgnoreCase(nome));
 	}
 
@@ -61,18 +61,25 @@ public class UsuarioController {
 
 	}
 
-	@PostMapping("/login")
+	@PutMapping("/login")
 	public ResponseEntity<CredenciaisDTO> logar(@Valid @RequestBody UsuarioLoginDTO usuarioParaAutenticar) {
 		return service.pegarCredenciais(usuarioParaAutenticar);
 	}
 
-	@PutMapping
-	public ResponseEntity<Usuario> put(@Valid @RequestBody Usuario novoUsuario) {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(novoUsuario));
+	/*@PutMapping("/atualizar")
+	public ResponseEntity<Usuario> atualizar(@Valid @RequestBody Usuario novoUsuario) {
+		return service.atualizarUsuario(novoUsuario).map(resp -> ResponseEntity.status(201).body(resp))
+				.orElseThrow(() -> {
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+							"Necessario que passe um idUsuario valido para alterar!.");
+				});
+
+	}*/
+	
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable (value = "id") Long idUsuario) {
+		repository.deleteById(idUsuario);
 	}
 
-	@DeleteMapping("/{id_usuario}")
-	public void delete(@PathVariable(value = "id_usuario") Long id_tema) {
-		repository.deleteById(id_tema);
-	}
 }
+

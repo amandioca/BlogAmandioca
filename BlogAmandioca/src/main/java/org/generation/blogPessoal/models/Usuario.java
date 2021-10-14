@@ -18,14 +18,9 @@ public class Usuario {
 	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long idUsuario;
 	private @NotBlank String nome;
 	private @NotBlank @Email String email;
-	private @NotBlank @Size(min = 5, max = 100) String senha;
+	private @NotBlank @Size(min = 8, max = 100) String senha;
 	
-	public Usuario(@NotBlank String nome, @NotBlank @Email String email,
-			@NotBlank @Size(min = 5, max = 100) String senha) {
-		super();
-		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
+	public Usuario() {
 	}
 
 	public long getIdUsuario() {
