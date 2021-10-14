@@ -30,9 +30,13 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers(HttpMethod.POST, "/usuarios/cadastro").permitAll()
 				.antMatchers(HttpMethod.PUT, "/usuarios/login").permitAll()
-				.anyRequest().authenticated().and()
-				.httpBasic().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.cors().and().csrf().disable();
+				.antMatchers(HttpMethod.OPTIONS).permitAll()
+				.anyRequest().authenticated()
+				.and().httpBasic()
+				.and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().cors()
+				.and().csrf().disable();
 	}
 
 	@Override
