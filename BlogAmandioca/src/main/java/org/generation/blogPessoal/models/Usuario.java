@@ -9,8 +9,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 /**
- * Cria tabela usuario em db_blog_pessoal e fornece os atributos.
- * 
  * @author Amanda
  * @version 1.0
  */

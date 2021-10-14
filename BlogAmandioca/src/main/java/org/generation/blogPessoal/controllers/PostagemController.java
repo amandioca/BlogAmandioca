@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Amanda
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/postagens")
 @CrossOrigin("*")
@@ -27,33 +31,33 @@ public class PostagemController {
 	private @Autowired PostagemRepository repository;
 
 	@GetMapping
-	public ResponseEntity<List<Postagem>> GetAll() {
+	public ResponseEntity<List<Postagem>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
 	@GetMapping("/{id_postagem}")
-	public ResponseEntity<Postagem> GetById(@PathVariable(value = "id_postagem") long id_postagem) {
+	public ResponseEntity<Postagem> getById(@PathVariable(value = "id_postagem") long id_postagem) {
 		return repository.findById(id_postagem).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.noContent().build());
 	}
 
 	@GetMapping("/titulo/{titulo}")
-	public ResponseEntity<List<Postagem>> GetByTitulo(@PathVariable(value = "titulo") String titulo) {
+	public ResponseEntity<List<Postagem>> getByTitulo(@PathVariable(value = "titulo") String titulo) {
 		return ResponseEntity.ok(repository.findByTituloContainingIgnoreCase(titulo));
 	}
 
 	@PostMapping
-	public ResponseEntity<Postagem> Post(@Valid @RequestBody Postagem novaPostagem) {
+	public ResponseEntity<Postagem> post(@Valid @RequestBody Postagem novaPostagem) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(novaPostagem));
 	}
 
 	@PutMapping
-	public ResponseEntity<Postagem> Put(@Valid @RequestBody Postagem novaPostagem) {
+	public ResponseEntity<Postagem> put(@Valid @RequestBody Postagem novaPostagem) {
 		return ResponseEntity.status(HttpStatus.OK).body(repository.save(novaPostagem));
 	}
 
 	@DeleteMapping("/{id_postagem}")
-	public void Delete(@PathVariable(value = "id_postagem") long id_postagem) {
+	public void delete(@PathVariable(value = "id_postagem") Long id_postagem) {
 		repository.deleteById(id_postagem);
 	}
 }

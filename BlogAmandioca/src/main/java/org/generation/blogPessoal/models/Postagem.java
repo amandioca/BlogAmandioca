@@ -12,11 +12,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 /**
- * Cria tabela postagem em db_blog_pessoal e fornece os atributos.
- * 
  * @author Amanda
- * @since 1.0
- *
+ * @version 1.0
  */
 @Entity
 public class Postagem {

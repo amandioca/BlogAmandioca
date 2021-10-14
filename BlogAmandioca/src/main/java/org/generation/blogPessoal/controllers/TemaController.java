@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author Amanda
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/temas")
 @CrossOrigin("*")
