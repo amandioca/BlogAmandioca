@@ -6,10 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author Amanda
@@ -18,26 +22,27 @@ import javax.validation.constraints.Size;
 @Entity
 public class Postagem {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idPostagem;
+	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) long idPostagem;
+	private @NotBlank @Size(min = 10, max = 100) String titulo;
+	private @NotBlank @Size(min = 10, max = 500) String texto;
+	private String midia;
+	private @Temporal(TemporalType.TIMESTAMP) Date date = new java.sql.Date(System.currentTimeMillis());
 
-	@NotBlank
-	@Size(min = 10, max = 100)
-	private String titulo;
-
-	@NotBlank
-	@Size(min = 10, max = 500)
-	private String texto;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date date = new java.sql.Date(System.currentTimeMillis());
-
-	public long getId() {
+	@ManyToOne
+	@JoinColumn(name = "fk_criador")
+	@JsonIgnoreProperties("minhasPostagens")
+	private Usuario criador;
+	
+	@ManyToOne
+	@JoinColumn(name = "fk_tema")
+	@JsonIgnoreProperties("postagens")
+	private Tema temaRelacionado;
+	
+	public long getIdPostagem() {
 		return idPostagem;
 	}
 
-	public void setId(long idPostagem) {
+	public void setIdPostagem(long idPostagem) {
 		this.idPostagem = idPostagem;
 	}
 
@@ -57,6 +62,14 @@ public class Postagem {
 		this.texto = texto;
 	}
 
+	public String getMidia() {
+		return midia;
+	}
+
+	public void setMidia(String midia) {
+		this.midia = midia;
+	}
+
 	public Date getDate() {
 		return date;
 	}
@@ -64,4 +77,21 @@ public class Postagem {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	public Usuario getCriador() {
+		return criador;
+	}
+
+	public void setCriador(Usuario criador) {
+		this.criador = criador;
+	}
+
+	public Tema getTemaRelacionado() {
+		return temaRelacionado;
+	}
+
+	public void setTemaRelacionado(Tema temaRelacionado) {
+		this.temaRelacionado = temaRelacionado;
+	}
+
 }

@@ -36,23 +36,23 @@ public class UsuarioController {
 	private @Autowired UsuarioService service;
 
 	@GetMapping
-	public ResponseEntity<List<Usuario>> getAll() {
+	public ResponseEntity<List<Usuario>> buscarTodes() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Usuario> getById(@PathVariable (value = "id") Long idUsuario) {
+	public ResponseEntity<Usuario> buscarPorId(@PathVariable (value = "id") Long idUsuario) {
 		return repository.findById(idUsuario).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/usuario/{usuario}")
-	public ResponseEntity<List<Usuario>> getByNome(@PathVariable String nome) {
+	public ResponseEntity<List<Usuario>> buscarPorNome(@PathVariable String nome) {
 		return ResponseEntity.ok(repository.findByNomeContainingIgnoreCase(nome));
 	}
 
 	@PostMapping("/cadastro")
-	public ResponseEntity<Object> salvar(@Valid @RequestBody Usuario novoUsuario) {
+	public ResponseEntity<Object> cadastrar(@Valid @RequestBody Usuario novoUsuario) {
 		return service.cadastrarUsuario(novoUsuario).map(resp -> ResponseEntity.status(201).body(resp))
 				.orElseThrow(() -> {
 					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -77,7 +77,7 @@ public class UsuarioController {
 	}*/
 	
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable (value = "id") Long idUsuario) {
+	public void deletar(@PathVariable (value = "id") Long idUsuario) {
 		repository.deleteById(idUsuario);
 	}
 
