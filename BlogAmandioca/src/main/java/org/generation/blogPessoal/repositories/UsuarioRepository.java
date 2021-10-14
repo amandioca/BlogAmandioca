@@ -1,6 +1,7 @@
 package org.generation.blogPessoal.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.generation.blogPessoal.models.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,8 +15,6 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	/**
-	 * Metodo utilizado para realizar pequisas na tabela usuario, coluna nome
-	 * 
 	 * @param nome
 	 * @return list com nome
 	 * @since 1.0
@@ -23,11 +22,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	public List<Usuario> findByNomeContainingIgnoreCase(String nome);
 
 	/**
-	 * Metodo utilizado para realizar pequisas na tabela usuario, coluna email
-	 * 
 	 * @param email
 	 * @return list com email
 	 * @since 1.0
 	 */
-	public List<Usuario> findByEmail(String email);
+	public Optional<Usuario> findByEmail(String email);
 }
