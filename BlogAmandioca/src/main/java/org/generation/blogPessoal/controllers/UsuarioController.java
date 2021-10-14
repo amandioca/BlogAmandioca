@@ -23,12 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.swagger.annotations.Api;
+
 /**
  * @author Amanda
  * @version 1.0
  */
 @RestController
 @RequestMapping("/usuarios")
+@Api(tags = "Controlador de Usuario", description = "Utilitario de Usuario")
 @CrossOrigin("*")
 public class UsuarioController {
 

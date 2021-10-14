@@ -19,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+
 /**
  * @author Amanda
  * @version 1.0
  */
 @RestController
 @RequestMapping("/temas")
+@Api(tags = "Controlador de Tema", description = "Utilitario de Temas")
 @CrossOrigin("*")
 public class TemaController {
 
