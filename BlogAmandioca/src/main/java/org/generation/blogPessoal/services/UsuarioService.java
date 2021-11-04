@@ -29,6 +29,17 @@ public class UsuarioService {
 		BCryptPasswordEncoder enconder = new BCryptPasswordEncoder();
 		return enconder.encode(senha);
 	}
+	
+	public Optional<Usuario> atualizarUsuario(Usuario usuarioParaAtualizar) {
+		return repository.findById(usuarioParaAtualizar.getIdUsuario()).map(resp -> {
+			resp.setNome(usuarioParaAtualizar.getNome());
+			resp.setSenha(encriptadorDeSenha(usuarioParaAtualizar.getSenha()));
+			return Optional.ofNullable(repository.save(resp));
+		}).orElseGet(() -> {
+			return Optional.empty();
+		});
+
+	}
 
 	public Optional<Object> cadastrarUsuario(Usuario usuarioParaCadastrar) {
 		return repository.findByEmail(usuarioParaCadastrar.getEmail()).map(usuarioExistente -> {
@@ -58,8 +69,8 @@ public class UsuarioService {
 				objetoCredenciaisDTO.setToken(gerarToken(usuarioParaAutenticar.getEmail(), usuarioParaAutenticar.getSenha()));
 				objetoCredenciaisDTO.setIdUsuario(resp.getIdUsuario());
 				objetoCredenciaisDTO.setNome(resp.getNome());
-				objetoCredenciaisDTO.setEmail(resp.getEmail());
-				objetoCredenciaisDTO.setSenha(resp.getSenha());
+				objetoCredenciaisDTO.setFoto(resp.getFoto());
+				objetoCredenciaisDTO.setTipo(resp.getTipo());
 
 				return ResponseEntity.status(201).body(objetoCredenciaisDTO);
 			} else {
