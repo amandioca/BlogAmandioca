@@ -58,8 +58,8 @@ public class UsuarioService {
 				objetoCredenciaisDTO.setToken(gerarToken(usuarioParaAutenticar.getEmail(), usuarioParaAutenticar.getSenha()));
 				objetoCredenciaisDTO.setIdUsuario(resp.getIdUsuario());
 				objetoCredenciaisDTO.setNome(resp.getNome());
-				objetoCredenciaisDTO.setEmail(resp.getEmail());
-				objetoCredenciaisDTO.setSenha(resp.getSenha());
+				objetoCredenciaisDTO.setFoto(resp.getFoto());
+				objetoCredenciaisDTO.setTipo(resp.getTipo());
 
 				return ResponseEntity.status(201).body(objetoCredenciaisDTO);
 			} else {
