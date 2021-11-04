@@ -44,7 +44,7 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Usuario> buscarPorId(@PathVariable (value = "id") Long idUsuario) {
+	public ResponseEntity<Usuario> buscarPorId(@PathVariable(value = "id") Long idUsuario) {
 		return repository.findById(idUsuario).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -69,20 +69,18 @@ public class UsuarioController {
 		return service.pegarCredenciais(usuarioParaAutenticar);
 	}
 
-	/*@PutMapping("/atualizar")
+	@PutMapping("/atualizar")
 	public ResponseEntity<Usuario> atualizar(@Valid @RequestBody Usuario novoUsuario) {
 		return service.atualizarUsuario(novoUsuario).map(resp -> ResponseEntity.status(201).body(resp))
 				.orElseThrow(() -> {
 					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
 							"Necessario que passe um idUsuario valido para alterar!.");
 				});
+	}
 
-	}*/
-	
 	@DeleteMapping("/{id}")
-	public void deletar(@PathVariable (value = "id") Long idUsuario) {
+	public void deletar(@PathVariable(value = "id") Long idUsuario) {
 		repository.deleteById(idUsuario);
 	}
 
 }
-
